@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        /* CONFIGURACIÓN POR DEFECTO: Puedes modificar estos valores */
+        :root {
+            --color-fondo: #ffedf2; /* Un rosa pastel suave */
+            --color-texto: #b30000; /* Rojo romántico */
+            --fuente-principal: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --transicion: 0.5s ease-in-out;
+        }
+
+        body {
+            background-color: var(--color-fondo);
+            color: var(--color-texto);
+            font-family: var(--fuente-principal);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .contenedor {
+            text-align: center;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+        }
+
+        /* Control de las páginas */
+        .pagina {
+            display: none; /* Ocultas por defecto */
+            animation: fadeIn 0.8s;
+        }
+
+        .pagina.activa {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 { font-size: 2rem; }
+        p { font-size: 1.2rem; line-height: 1.6; }
+
+        .botones {
+            margin-top: 30px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        button {
+            background-color: var(--color-texto);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: transform 0.2s;
+        }
+
+        button:hover { transform: scale(1.05); }
+        button:disabled { background-color: #ccc; cursor: not-allowed; }
+
+        .imagen-final {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="contenedor">
+    <div class="pagina activa" id="p1">
+        <h1>¡Hola, amor! ❤️</h1>
+        <p>Hoy es un día especial y quería dedicarte algo diferente. Haz clic en "Siguiente" para continuar...</p>
+    </div>
+
+    <div class="pagina" id="p2">
+        <h1>Nuestros momentos</h1>
+        <p>Desde que te conocí, cada día ha sido una aventura increíble. Gracias por estar a mi lado.</p>
+    </div>
+
+    <div class="pagina" id="p3">
+        <h1>Una promesa</h1>
+        <p>Prometo cuidarte, escucharte y seguir construyendo sueños juntos. Eres mi persona favorita.</p>
+    </div>
+
+    <div class="pagina" id="p4">
+        <h1>¡Te amo!</h1>
+        <p>Aquí tienes un recuerdo de nosotros:</p>
+        <img src="https://via.placeholder.com/400x300?text=Tu+Foto+Aqui" alt="Nuestra Foto" class="imagen-final">
+    </div>
+
+    <div class="botones">
+        <button id="btnAnterior" onclick="cambiarPagina(-1)" disabled>Anterior</button>
+        <button id="btnSiguiente" onclick="cambiarPagina(1)">Siguiente</button>
+    </div>
+</div>
+
+<script>
+    let paginaActual = 1;
+    const totalPaginas = 4;
+
+    function cambiarPagina(paso) {
+        // Ocultar página actual
+        document.getElementById(`p${paginaActual}`).classList.remove('activa');
+        
+        // Actualizar índice
+        paginaActual += paso;
+
+        // Mostrar nueva página
+        document.getElementById(`p${paginaActual}`).classList.add('activa');
+
+        // Controlar estado de los botones
+        document.getElementById('btnAnterior').disabled = (paginaActual === 1);
+        document.getElementById('btnSiguiente').disabled = (paginaActual === totalPaginas);
+    }
+</script>
+
+</body>
+</html>
+</body>
+</html>
