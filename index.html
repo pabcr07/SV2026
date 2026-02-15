@@ -4,19 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-</head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Meow+Script&display=swap" rel="stylesheet">
 <body>
     <style>
-        /* CONFIGURACIÓN POR DEFECTO: Puedes modificar estos valores */
+        
         :root {
-            --color-fondo: #ffedf2; /* Un rosa pastel suave */
-            --color-texto: #b30000; /* Rojo romántico */
-            --fuente-principal: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --color-texto: #b30000;
+            --fuente-principal:"Meow Script", cursive;
             --transicion: 0.5s ease-in-out;
         }
 
         body {
             background-color: var(--color-fondo);
+            background-image: url(src/fondo.png); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             color: var(--color-texto);
             font-family: var(--fuente-principal);
             display: flex;
@@ -25,27 +30,36 @@
             height: 100vh;
             margin: 0;
             overflow: hidden;
+    
         }
 
         .contenedor {
             text-align: center;
             background: white;
-            padding: 40px;
+            padding: 30px;
             border-radius: 20px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             max-width: 500px;
-            width: 90%;
+            width: 85%;
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; 
             position: relative;
         }
 
-        /* Control de las páginas */
+      
         .pagina {
-            display: none; /* Ocultas por defecto */
+            display: none; 
+            flex-direction: column; /* Contenido de la página uno abajo del otro */
+            justify-content: center; /* Centra el texto verticalmente en su espacio */
+            align-items: center;
+            flex-grow: 1; /* Ocupa todo el espacio disponible entre el techo y los botones */
             animation: fadeIn 0.8s;
         }
 
         .pagina.activa {
-            display: block;
+            display: flex;
         }
 
         @keyframes fadeIn {
@@ -53,13 +67,13 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        h1 { font-size: 2rem; }
-        p { font-size: 1.2rem; line-height: 1.6; }
+        h1 { font-size: 3.5rem; }
+        p { font-size: 1.8rem; line-height: 1.6; }
 
         .botones {
-            margin-top: 30px;
             display: flex;
             justify-content: space-between;
+            padding-top: 20px;
         }
 
         button {
@@ -71,17 +85,20 @@
             cursor: pointer;
             font-size: 1rem;
             transition: transform 0.2s;
+            font-family: 'Arial', sans-serif;
         }
 
         button:hover { transform: scale(1.05); }
         button:disabled { background-color: #ccc; cursor: not-allowed; }
 
         .imagen-final {
-            width: 100%;
-            max-height: 300px;
-            object-fit: cover;
+           width: 250px; /* Tamaño fijo para mantener el cuadrado */
+            height: 250px;
+            object-fit: cover; /* Recorta la imagen para que llene el cuadrado */
             border-radius: 15px;
-            margin-top: 15px;
+            margin: 15px auto; /* Centrada horizontalmente */
+            border: 5px solid white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
     </style>
 </head>
@@ -89,24 +106,24 @@
 
 <div class="contenedor">
     <div class="pagina activa" id="p1">
-        <h1>¡Hola, amor! ❤️</h1>
-        <p>Hoy es un día especial y quería dedicarte algo diferente. Haz clic en "Siguiente" para continuar...</p>
+        <h1>Hola, mi vida ❤️</h1>
+        <p>Primero voy a pedirte perdon por un regalo tan pobre pero no queria dejar pasar este día asi nomas. Te dejo este pequeño detalle dedicandote unas palabras para ti y para que todos los dias puedas recordar que te amo. Espero que te guste</p>
     </div>
 
     <div class="pagina" id="p2">
         <h1>Nuestros momentos</h1>
-        <p>Desde que te conocí, cada día ha sido una aventura increíble. Gracias por estar a mi lado.</p>
+        <p>Gracias por estar a mi lado siempre que te necesito, a pesar de todos mis defectos, y espero que sea asi siempre</p>
     </div>
 
     <div class="pagina" id="p3">
         <h1>Una promesa</h1>
-        <p>Prometo cuidarte, escucharte y seguir construyendo sueños juntos. Eres mi persona favorita.</p>
+        <p>Prometo cuidarte, escucharte, mimarte, y sobre todo, AMARTE</p>
     </div>
 
     <div class="pagina" id="p4">
-        <h1>¡Te amo!</h1>
-        <p>Aquí tienes un recuerdo de nosotros:</p>
-        <img src="https://via.placeholder.com/400x300?text=Tu+Foto+Aqui" alt="Nuestra Foto" class="imagen-final">
+        <h1>Te amo, gordita</h1>
+        <p>Un recuerdo de nosotros:</p>
+        <img src="src/foto.jpeg" alt="Nuestra Foto" class="imagen-final">
     </div>
 
     <div class="botones">
@@ -120,16 +137,12 @@
     const totalPaginas = 4;
 
     function cambiarPagina(paso) {
-        // Ocultar página actual
         document.getElementById(`p${paginaActual}`).classList.remove('activa');
         
-        // Actualizar índice
         paginaActual += paso;
 
-        // Mostrar nueva página
         document.getElementById(`p${paginaActual}`).classList.add('activa');
 
-        // Controlar estado de los botones
         document.getElementById('btnAnterior').disabled = (paginaActual === 1);
         document.getElementById('btnSiguiente').disabled = (paginaActual === totalPaginas);
     }
